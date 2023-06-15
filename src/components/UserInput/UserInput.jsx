@@ -1,22 +1,32 @@
 import React, { useState } from "react";
 import "./UserInput.css";
 
+const initialUserInput = {
+    currentSavings: 1000,
+    yearlyContribution: 1200,
+    expectedReturn: 7,
+    duration: 10,
+};
+
 const UserInput = (props) => {
-    const [currentSavings, setCurrentSavings] = useState(1000);
-    const [yearlySavings, setYearlySavings] = useState(1200);
-    const [expectedInterest, setExpectedInterest] = useState(7);
-    const [investmentDuration, setInvestmentDuration] = useState(10);
+    const [userInput, setUserInput] = useState(initialUserInput);
 
     const submitHandler = (e) => {
         e.preventDefault();
-        props.onCalculate={}
+        props.onCalculate(userInput)
     };
 
     const resetHandler = () => {
-        setCurrentSavings(1000);
-        setYearlySavings(1200);
-        setExpectedInterest(7);
-        setInvestmentDuration(10);
+        setUserInput(initialUserInput);
+    };
+
+    const inputChangeHandler = (input, value) => {
+        setUserInput((prevInput) => {
+            return {
+                ...prevInput,
+                [input]: value,
+            };
+        });
     };
 
     return (
@@ -25,10 +35,14 @@ const UserInput = (props) => {
                 <p>
                     <label htmlFor="current-savings">Current Savings ($)</label>
                     <input
-                        onChange={(e) => setCurrentSavings(e.target.value)}
+                        
+                        onChange={(e) =>
+                            inputChangeHandler("currentSavings", e.target.value)
+                        }
                         type="number"
                         id="current-savings"
-                        value={currentSavings}
+                        value={userInput.currentSavings}
+                      
                     />
                 </p>
                 <p>
@@ -36,10 +50,14 @@ const UserInput = (props) => {
                         Yearly Savings ($)
                     </label>
                     <input
-                        onChange={(e) => setYearlySavings(e.target.value)}
+                       
+                        onChange={(e) =>
+                            inputChangeHandler("yearlyContribution", e.target.value)
+                        }
                         type="number"
                         id="yearly-contribution"
-                        value={yearlySavings}
+                        value={userInput.yearlyContribution}
+                       
                     />
                 </p>
             </div>
@@ -49,10 +67,17 @@ const UserInput = (props) => {
                         Expected Interest (%, per year)
                     </label>
                     <input
-                        onChange={(e) => setExpectedInterest(e.target.value)}
+                       
+                        onChange={(e) =>
+                            inputChangeHandler(
+                                "expectedReturn",
+                                e.target.value
+                            )
+                        }
                         type="number"
                         id="expected-return"
-                        value={expectedInterest}
+                        value={userInput.expectedReturn}
+                        // value={expectedInterest}
                     />
                 </p>
                 <p>
@@ -60,10 +85,14 @@ const UserInput = (props) => {
                         Investment Duration (years)
                     </label>
                     <input
-                        onChange={(e) => setInvestmentDuration(e.target.value)}
+                        // onChange={(e) => setInvestmentDuration(e.target.value)}
+                        onChange={(e) =>
+                            inputChangeHandler("duration", e.target.valve)
+                        }
                         type="number"
                         id="duration"
-                        value={investmentDuration}
+                        value={userInput.duration}
+                        // value={duration}
                     />
                 </p>
             </div>
