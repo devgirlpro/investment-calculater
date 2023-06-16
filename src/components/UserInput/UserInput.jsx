@@ -13,7 +13,7 @@ const UserInput = (props) => {
 
     const submitHandler = (e) => {
         e.preventDefault();
-        props.onCalculate(userInput)
+        props.onCalculate(userInput);
     };
 
     const resetHandler = () => {
@@ -24,7 +24,7 @@ const UserInput = (props) => {
         setUserInput((prevInput) => {
             return {
                 ...prevInput,
-                [input]: value,
+                [input]: +value,
             };
         });
     };
@@ -35,14 +35,12 @@ const UserInput = (props) => {
                 <p>
                     <label htmlFor="current-savings">Current Savings ($)</label>
                     <input
-                        
                         onChange={(e) =>
                             inputChangeHandler("currentSavings", e.target.value)
                         }
                         type="number"
                         id="current-savings"
                         value={userInput.currentSavings}
-                      
                     />
                 </p>
                 <p>
@@ -50,14 +48,15 @@ const UserInput = (props) => {
                         Yearly Savings ($)
                     </label>
                     <input
-                       
                         onChange={(e) =>
-                            inputChangeHandler("yearlyContribution", e.target.value)
+                            inputChangeHandler(
+                                "yearlyContribution",
+                                e.target.value
+                            )
                         }
                         type="number"
                         id="yearly-contribution"
                         value={userInput.yearlyContribution}
-                       
                     />
                 </p>
             </div>
@@ -67,12 +66,8 @@ const UserInput = (props) => {
                         Expected Interest (%, per year)
                     </label>
                     <input
-                       
                         onChange={(e) =>
-                            inputChangeHandler(
-                                "expectedReturn",
-                                e.target.value
-                            )
+                            inputChangeHandler("expectedReturn", e.target.value)
                         }
                         type="number"
                         id="expected-return"
@@ -87,7 +82,7 @@ const UserInput = (props) => {
                     <input
                         // onChange={(e) => setInvestmentDuration(e.target.value)}
                         onChange={(e) =>
-                            inputChangeHandler("duration", e.target.valve)
+                            inputChangeHandler("duration", e.target.value)
                         }
                         type="number"
                         id="duration"
