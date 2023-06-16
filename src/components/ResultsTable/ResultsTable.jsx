@@ -1,5 +1,5 @@
 import React from "react";
-
+import "./ResultsTable.css";
 const ResultsTable = (props) => {
     return (
         <table className="result">
@@ -14,7 +14,7 @@ const ResultsTable = (props) => {
             </thead>
             <tbody>
                 {props.data.map((yearData) => (
-                    <tr>
+                    <tr key={yearData.year}>
                         <td>Y{yearData.year}</td>
                         <td>{yearData.savingsEndOfYear}</td>
                         <td>{yearData.yearlyInterest}</td>
@@ -23,7 +23,10 @@ const ResultsTable = (props) => {
                                 props.initialInvestment -
                                 yearData.yearlyContribution * yearData.year}
                         </td>
-                        <td>{props.initialInvestment + yearData.yearlyContribution * yearData.year}</td>
+                        <td>
+                            {props.initialInvestment +
+                                yearData.yearlyContribution * yearData.year}
+                        </td>
                     </tr>
                 ))}
             </tbody>
